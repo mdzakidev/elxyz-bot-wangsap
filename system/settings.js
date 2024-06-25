@@ -1,10 +1,11 @@
 global.chalk = require("chalk")
 global.fs = require("fs")
 
-global.owner = '6289604363344' 
-global.botNumber = '6289604363344'
-global.gambar = 'https://telegra.ph/file/5625f1e35bbc08a500155.jpg'
-global.author = 'KiiCode Official'
+global.ownername = "ᴋɪɪᴄᴏᴅᴇ ᴘʀᴏᴊᴇᴄᴛꜱ"
+global.botname = "ᴇʟxʏᴢ"
+global.botNumber = '6285974563066'
+global.gambar = 'https://telegra.ph/file/b0eb229c895d9e8df4967.jpg'
+global.author = 'ᴋɪɪᴄᴏᴅᴇ ᴘʀᴏᴊᴇᴄᴛꜱ'
 global.mess = {
     wait: 'Loading...',
     succes: 'Sip, Berhasil',
