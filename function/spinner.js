@@ -1,9 +1,9 @@
-require("../Admin/settings")
+require("../system/settings")
 const fs = require('fs')
 const chalk = require('chalk')
 
 const spin = require('spinnies')
-const { color, bgcolor } = require("../function/color")
+const { color, bgcolor } = require("./color")
 global.Jimp = require("jimp")
 
 const spinner = { 
