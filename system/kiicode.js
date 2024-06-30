@@ -132,6 +132,20 @@ if ('contextInfo' in message) generate.message[type2].contextInfo = message?.con
 return await kiicode.relayMessage(chatId, generate.message, { messageId: generate.key.id })
 }
 
+const kiibut = (anu) => {
+const {message, key} = generateWAMessageFromContent(m.chat, {
+  interactiveMessage: {
+    body: {text: anu},
+    footer: {text: `\n${global.ownername}`},
+    nativeFlowMessage: {
+      buttons: [{text: "KiiCode"}
+           ],
+    }
+  },
+}, {quoted: { key: { participant: '0@s.whatsapp.net', remoteJid: "0@s.whatsapp.net" }, message: { conversation: `${body}`}}})
+ kiicode.relayMessage(m.chat, {viewOnceMessage:{message}}, {messageId:key.id})
+}
+	
 //=================================================//
 switch (command) {
 case 'menu':{
@@ -213,6 +227,43 @@ exec(budy.slice(2), (err, stdout) => {
 if (err) return m.reply(`${err}`)
 if (stdout) return m.reply(stdout)
 })
+}
+
+kiicode.elxyz = kiicode.elxyz ? kiicode.elxyz : {};
+if (m.isBaileys && m.fromMe) return;
+if (!m.text) return
+if (!kiicode.elxyz[m.chat]) return;      
+const prompt = m.text;
+let sessions = {};
+let aiStatus = {};
+if (!prompt || prompt.startsWith('/'))
+  if (!kiicode.elxyz[m.chat]) return;
+
+  console.log(`[${moment().format('HH:mm')}] from @${pushname}: ${prompt}`);
+
+  try {
+    const now = moment().tz('Asia/Jakarta');
+    const jam = now.format('HH:mm');
+    const tgl = now.format('DD-MM-YYYY');
+    const hari = now.format('dddd');
+    let postData = {
+    prompt: prompt,
+    sessionId: `${m.sender}`,
+    character: `Kamu adalah elxyz, kamu adalah ai yang cerdas dan baik`
+};
+
+    let response = await axios({
+        url: "https://elxyz.me/api/chat",
+        method: 'POST',
+        data: new URLSearchParams(Object.entries(postData)),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    });
+    kiibut(response.data.data.answer)
+} catch (error) {
+    console.error("Error during chat request:", error);
+    return "An error occurred during the chat process.";
 }
 
 if (budy.startsWith('>')) {
